@@ -1,44 +1,65 @@
-<section class="relative top-0 flex flex-col items-center justify-center w-full min-h-screen -mt-24 bg-white lg:min-h-screen">
-    
-        <div class="flex flex-col items-center justify-between flex-1 w-full max-w-2xl gap-6 px-8 pt-32 mx-auto text-left md:px-12 xl:px-20 lg:pt-32 lg:pb-16 lg:max-w-7xl lg:flex-row">
-            <div class="w-full lg:w-1/2">
-                <h1 class="text-6xl font-bold tracking-tighter text-left sm:text-7xl md:text-8xl sm:text-center lg:text-left text-zinc-900 text-balance">
-                    <span class="block origin-left lg:scale-90 text-nowrap">Ship in Days</span> <span class="pr-4 text-transparent text-neutral-600 bg-clip-text bg-gradient-to-b from-neutral-900 to-neutral-500">Not Weeks</span>
-                </h1>
-                <p class="mx-auto mt-5 text-2xl font-normal text-left sm:max-w-md lg:ml-0 lg:max-w-md sm:text-center lg:text-left text-zinc-500">
-                    Customize this to highlight your product’s unique selling points<span class="hidden sm:inline"> and features</span>.
-                </p>
-                <div class="flex flex-col items-center justify-center gap-3 mx-auto mt-8 md:gap-2 lg:justify-start md:ml-0 md:flex-row">
-                    <x-button size="lg" class="w-full lg:w-auto">Primary Button</x-button>
-                    <x-button size="lg" color="secondary" class="w-full lg:w-auto">Secondary Button</x-button>
-                </div>
-            </div>
-            <div class="flex items-center justify-center w-full mt-12 lg:w-1/2 lg:mt-0">
-                <img alt="Wave Character" class="relative w-full lg:scale-125 xl:translate-x-6" src="/wave/img/character.png" style="max-width:450px;">
-            </div>
+<style>
+    .font-neuropol {
+        font-family: 'Neuropol', sans-serif;
+    }
+    .text-glow {
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 20px rgba(192, 192, 192, 0.3);
+    }
+    .moon {
+        background: radial-gradient(circle, #4a4a4a 0%, #2a2a2a 50%, #1a1a1a 100%);
+        filter: blur(5px);
+        transform: scale(1.5);
+    }
+</style>
+
+<section id="hero-section" class="relative flex items-center justify-center w-full min-h-screen -mt-24 bg-black overflow-hidden">
+    <div id="moon" class="absolute w-96 h-96 md:w-[600px] md:h-[600px] rounded-full moon"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center w-full max-w-4xl px-8 mx-auto text-center">
+        <h1 id="hero-title" class="font-neuropol text-5xl font-bold tracking-wider text-white sm:text-6xl md:text-7xl text-glow">
+            MOORS MINDS
+        </h1>
+        <p id="hero-subtitle" class="mt-6 text-xl font-light text-gray-300 md:text-2xl max-w-2xl">
+            Pioneering the Future of Intelligent Systems
+        </p>
+        <div id="hero-buttons" class="flex flex-col items-center justify-center gap-4 mx-auto mt-10 sm:flex-row">
+            <x-button size="lg" class="w-full sm:w-auto">Explore Our Work</x-button>
+            <x-button size="lg" color="secondary" class="w-full sm:w-auto">Contact Us</x-button>
         </div>
-        <div class="flex-shrink-0 lg:h-[150px] flex border-t border-zinc-200 items-center w-full bg-white">
-            <div class="grid h-auto grid-cols-1 px-8 py-10 mx-auto space-y-5 divide-y max-w-7xl lg:space-y-0 lg:divide-y-0 divide-zinc-200 lg:py-0 lg:divide-x md:px-12 lg:px-20 lg:divide-zinc-200 lg:grid-cols-3">
-                <div class="">
-                    <h3 class="flex items-center font-medium text-zinc-900">
-                        Key Feature
-                    </h3>
-                    <p class="mt-2 text-sm font-medium text-zinc-500">
-                        Why might users be interested in using your product. <span class="hidden lg:inline">Tell them more here.</span>
-                    </p>
-                </div>
-                <div class="pt-5 lg:pt-0 lg:px-10">
-                    <h3 class="font-medium text-zinc-900">Pain Points</h3>
-                    <p class="mt-2 text-sm text-zinc-500">
-                        What are some pain points that your SaaS aims to solve? <span class="hidden lg:inline">Explain here.</span>
-                    </p>
-                </div>
-                <div class="pt-5 lg:pt-0 lg:px-10">
-                    <h3 class="font-medium text-zinc-900">Unique Advantage</h3>
-                    <p class="mt-2 text-sm text-zinc-500">
-                        Explain your unique advantage over others in the market.
-                    </p>
-                </div>
-            </div>
-        </div>
+    </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const hero = document.getElementById('hero-section');
+        const moon = document.getElementById('moon');
+        const title = document.getElementById('hero-title');
+        const subtitle = document.getElementById('hero-subtitle');
+
+        // GSAP Entrance Animation
+        gsap.fromTo(moon, { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1.5, duration: 2.5, ease: 'power3.out' });
+        gsap.fromTo(title, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out', delay: 0.5 });
+        gsap.fromTo(subtitle, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out', delay: 0.8 });
+        gsap.fromTo('#hero-buttons', { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power3.out', delay: 1.2 });
+
+        // GSAP Parallax on Mouse Move
+        hero.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const x = (clientX / window.innerWidth) - 0.5;
+            const y = (clientY / window.innerHeight) - 0.5;
+
+            gsap.to(moon, {
+                x: -x * 50,
+                y: -y * 30,
+                ease: 'power2.out',
+                duration: 1.5
+            });
+
+            gsap.to(title, {
+                x: x * 20,
+                y: y * 10,
+                ease: 'power2.out',
+                duration: 1
+            });
+        });
+    });
+</script>

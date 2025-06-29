@@ -27,6 +27,9 @@ export default {
 
     theme: {
         extend: {
+            fontFamily: {
+                neuropol: ['Neuropol', 'sans-serif'],
+            },
             animation: {
                 'marquee': 'marquee 25s linear infinite',
             },
