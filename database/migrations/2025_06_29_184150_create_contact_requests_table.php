@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone')->nullable();
             $table->text('message')->nullable();
-            $table->string('service_interest')->nullable();
+            $table->foreignId('service_id')->nullable()->constrained();
             $table->string('source')->nullable(); // e.g. “Home CTA”
             $table->timestamps();
         });
