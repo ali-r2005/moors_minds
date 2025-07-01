@@ -3,31 +3,26 @@
         font-family: 'Neuropol', sans-serif;
     }
     .text-glow {
-        text-shadow: 0 0 8px rgba(255, 255, 255, 0.4), 0 0 20px rgba(192, 192, 192, 0.4);
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 191, 255, 0.5);
     }
-    .moon {
-        background: radial-gradient(circle, #4a4a4a 0%, #2a2a2a 50%, #1a1a1a 100%);
-        filter: blur(5px);
-        transform: scale(1.5);
+    #hero-section {
+        background-color: #000;
     }
-    #galaxy-shadow {
+    #moon-canvas {
         position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        box-shadow:
-            0 0 60px 30px #4a00e0, /* Purple */
-            0 0 100px 60px #8e2de2, /* Violet */
-            0 0 140px 90px #1e00ff; /* Blue */
-        opacity: 0.15;
-        filter: blur(100px);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        z-index: 20;
+        filter: blur(1.5px);
     }
 </style>
 
 <section id="hero-section" class="relative flex items-center justify-center w-full min-h-screen -mt-24 bg-black overflow-hidden">
-    <div id="galaxy-shadow"></div>
     <canvas id="binary-canvas" class="absolute top-0 left-0 w-full h-full opacity-20 z-10"></canvas>
-    <div id="moon" class="absolute w-96 h-96 md:w-[600px] md:h-[600px] rounded-full moon z-20"></div>
+    <canvas id="moon-canvas"></canvas>
     <div class="relative z-30 flex flex-col items-center justify-center w-full max-w-4xl px-8 mx-auto text-center">
         <h1 id="hero-title" class="font-neuropol text-5xl font-bold tracking-wider text-white sm:text-6xl md:text-7xl text-glow">
             MOORS MINDS
@@ -43,61 +38,85 @@
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const hero = document.getElementById('hero-section');
-        const moon = document.getElementById('moon');
-        const title = document.getElementById('hero-title');
-        const galaxy = document.getElementById('galaxy-shadow');
+document.addEventListener('DOMContentLoaded', function () {
+    // --- Binary Rain Animation ---
+    const binaryCanvas = document.getElementById('binary-canvas');
+    const binaryCtx = binaryCanvas.getContext('2d');
+    let binaryWidth = binaryCanvas.width = window.innerWidth;
+    let binaryHeight = binaryCanvas.height = window.innerHeight;
+    let binaryColumns = Math.floor(binaryWidth / 20);
+    let drops = Array(binaryColumns).fill(1);
+    const binaryChars = "01";
 
-        // GSAP Entrance Animation
-        gsap.fromTo(galaxy, { opacity: 0, scale: 0.8 }, { opacity: 0.15, scale: 1, duration: 4, ease: 'power3.out' });
-        gsap.fromTo(moon, { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1.5, duration: 2.5, ease: 'power3.out', delay: 0.5 });
-        gsap.fromTo(title, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out', delay: 1 });
-        gsap.fromTo('#hero-subtitle', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out', delay: 1.3 });
-        gsap.fromTo('#hero-buttons', { opacity: 0 }, { opacity: 1, duration: 1.5, ease: 'power3.out', delay: 1.6 });
-
-        // GSAP Parallax on Mouse Move
-        hero.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const x = (clientX / window.innerWidth) - 0.5;
-            const y = (clientY / window.innerHeight) - 0.5;
-
-            gsap.to(galaxy, { x: -x * 100, y: -y * 80, ease: 'power2.out', duration: 2 });
-            gsap.to(moon, { x: -x * 50, y: -y * 30, ease: 'power2.out', duration: 1.5 });
-            gsap.to(title, { x: x * 20, y: y * 10, ease: 'power2.out', duration: 1 });
-        });
-
-        // GSAP Galaxy Animation
-        gsap.to(galaxy, { rotation: 360, duration: 200, repeat: -1, ease: 'none' });
-
-        // Binary Canvas Animation
-        const canvas = document.getElementById('binary-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const binary = '01';
-        const fontSize = 24;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-        for (let x = 0; x < columns; x++) drops[x] = 1;
-
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#6B7280'; // Gray-500
-            ctx.font = fontSize + 'px monospace';
-            for (let i = 0; i < drops.length; i++) {
-                const text = binary.charAt(Math.floor(Math.random() * binary.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
+    function drawBinary() {
+        binaryCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        binaryCtx.fillRect(0, 0, binaryWidth, binaryHeight);
+        binaryCtx.fillStyle = '#00bfff'; // Deep Sky Blue to match the glow
+        binaryCtx.font = '20px monospace';
+        for (let i = 0; i < drops.length; i++) {
+            let text = binaryChars.charAt(Math.floor(Math.random() * binaryChars.length));
+            binaryCtx.fillText(text, i * 20, drops[i] * 20);
+            if (drops[i] * 20 > binaryHeight && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
         }
-        setInterval(draw, 40);
+    }
+    setInterval(drawBinary, 33);
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+    // --- Three.js 3D Moon --- 
+    const moonCanvas = document.getElementById('moon-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas: moonCanvas, alpha: true });
+    renderer.setSize(600, 600);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    camera.position.z = 5;
+
+    // Moon Sphere
+    const geometry = new THREE.SphereGeometry(1.5, 64, 64);
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/17271/lroc_color_poles_1k.jpg');
+    const displacementMap = textureLoader.load('https://s3-us-west-2.amazonaws.com/s.cdpn.io/17271/ldem_3_8bit.jpg');
+    const material = new THREE.MeshPhongMaterial({
+        map: texture,
+        displacementMap: displacementMap,
+        displacementScale: 0.06,
+        bumpMap: displacementMap,
+        bumpScale: 0.04,
+        specular: new THREE.Color('#223845'),
+        shininess: 3
     });
+    const moon = new THREE.Mesh(geometry, material);
+    scene.add(moon);
+
+    // Lighting
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(-100, 10, 50);
+    scene.add(light);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+    scene.add(ambientLight);
+
+    // Animation Loop
+    function animate() {
+        requestAnimationFrame(animate);
+        moon.rotation.y += 0.0005;
+        moon.rotation.x += 0.0001;
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    // --- GSAP Animations ---
+    gsap.from('#hero-title', { duration: 1.5, y: -100, opacity: 0, ease: 'power3.out', delay: 0.5 });
+    gsap.from('#hero-subtitle', { duration: 1.5, y: 100, opacity: 0, ease: 'power3.out', delay: 0.8 });
+    gsap.from('#hero-buttons', { duration: 1.5, scale: 0.5, opacity: 0, ease: 'back.out(1.7)', delay: 1.2 });
+    gsap.fromTo('#moon-canvas', { scale: 0.5, opacity: 0 }, { duration: 3, scale: 1, opacity: 1, ease: 'power2.inOut', delay: 0.2 });
+
+    // --- Resize Handling ---
+    function onResize() {
+        binaryWidth = binaryCanvas.width = window.innerWidth;
+        binaryHeight = binaryCanvas.height = window.innerHeight;
+        binaryColumns = Math.floor(binaryWidth / 20);
+        drops = Array(binaryColumns).fill(1);
+    }
+    window.addEventListener('resize', onResize);
+});
 </script>
