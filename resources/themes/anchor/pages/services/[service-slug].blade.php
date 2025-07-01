@@ -62,9 +62,7 @@ new class extends Component
                                 </div>
                                 @if($service->cta_label && $service->cta_link)
                                     <div class="mt-8">
-                                        <x-elements.button size="lg" :href="$service->cta_link">
-                                            {{ $service->cta_label }}
-                                        </x-elements.button>
+                                        <x-button tag="a" href="{{ $service->cta_link }}" size="lg">{{ $service->cta_label }}</x-button>
                                     </div>
                                 @endif
                             </div>
