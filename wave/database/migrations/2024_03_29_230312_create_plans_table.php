@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id'); // Auto-incrementing UNSIGNED INTEGER (primary key)
             $table->string('name'); // VARCHAR equivalent column
             $table->text('description')->nullable(); // TEXT column, nullable for the description
-            $table->string('features'); // VARCHAR equivalent column for features
+            $table->text('features'); // VARCHAR equivalent column for features
             $table->string('monthly_price_id')->nullable();
             $table->string('yearly_price_id')->nullable();
             $table->string('onetime_price_id')->nullable();
