@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('video_url')->nullable();
             $table->json('images')->nullable();
             $table->text('results')->nullable();
-            $table->foreignId('service_id')->constrained()->onDelete('set null');
+            $table->foreignId('service_id')->nullable()->constrained()->onDelete('set null'); // UNSIGNED BIGINT
             $table->timestamps();
         });
     }

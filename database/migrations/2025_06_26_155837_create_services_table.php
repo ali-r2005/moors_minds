@@ -20,8 +20,7 @@ return new class extends Migration
             $table->json('use_cases')->nullable();
             $table->json('features')->nullable();
             $table->string('image_url')->nullable();
-            $table->unsignedInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
             $table->string('cta_label')->nullable();
             $table->string('cta_link')->nullable();
             $table->timestamps();
