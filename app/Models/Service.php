@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Project;
+use App\Models\ContactRequest;
 
 class Service extends Model
 {
@@ -33,5 +34,9 @@ class Service extends Model
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+    public function contactRequests()
+    {
+        return $this->hasMany(ContactRequest::class);
     }
 }

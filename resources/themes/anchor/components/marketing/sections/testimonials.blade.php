@@ -1,56 +1,50 @@
 <section class="w-full">
-    <x-marketing.elements.heading level="h2" title="Oceans of Approval" description="Find out why users are on board with Wave, through their own words and success tales." />
+    <x-marketing.elements.heading level="h2" title="What Our Partners Say" description="Discover how we've helped businesses transform and achieve their goals through innovation and expertise." />
     <ul role="list" class="grid grid-cols-1 gap-12 py-12 mx-auto max-w-2xl lg:max-w-none lg:grid-cols-3">
         <li>
             <figure class="flex flex-col justify-between h-full">
-                <blockquote class="">
+                <blockquote>
                     <p class="text-sm sm:text-base font-medium text-zinc-500">
-                        Wave's ready-to-use features sped up our launch significantly. Its authentication and subscription tools are particularly impressive and user-friendly.
+                        "Moors & Minds delivered a flawless web platform that exceeded our expectations. Their technical expertise and project management are second to none."
                     </p>
                 </blockquote>
-                <figcaption class="flex flex-col justify-between mt-6">
-                    <img alt="#_" src="https://cdn.devdojo.com/images/june2024/adam.jpeg" class="object-cover rounded-full grayscale size-14">
-                    <div class="mt-4">
-                        <div class="font-medium text-zinc-900">Adam Wathan</div>
-                        <div class="mt-1 text-sm text-zinc-500">
-                            Creator of Tailwind CSS
-                        </div>
+                <figcaption class="flex items-center mt-6">
+                    <img alt="Alex Johnson" src="https://cdn.devdojo.com/images/june2024/team-1.jpeg" class="object-cover rounded-full size-14">
+                    <div class="ml-4">
+                        <div class="font-medium text-zinc-900">Alex Johnson</div>
+                        <div class="mt-1 text-sm text-zinc-500">CTO, Innovatech</div>
                     </div>
                 </figcaption>
             </figure>
         </li>
         <li>
             <figure class="flex flex-col justify-between h-full">
-                <blockquote class="">
+                <blockquote dir="rtl">
                     <p class="text-sm sm:text-base font-medium text-zinc-500">
-                        Wave transformed our development workflow with its excellent API and profile management, saving us valuable time.
+                        "بفضل استراتيجياتهم التسويقية المبتكرة وتصاميمهم الجذابة، شهدنا نموًا كبيرًا في علامتنا التجارية. فريق عمل محترف ومبدع."
                     </p>
                 </blockquote>
-                <figcaption class="flex flex-col justify-between mt-6">
-                    <img alt="#_" src="https://cdn.devdojo.com/images/june2024/caleb.jpeg" class="object-cover rounded-full grayscale size-14">
-                    <div class="mt-4">
-                        <div class="font-medium text-zinc-900">Caleb Porzio</div>
-                        <div class="mt-1 text-sm text-zinc-500">
-                            Creator of Livewire & Alpine
-                        </div>
+                <figcaption class="flex items-center mt-6" dir="rtl">
+                    <img alt="Fatima Al-Ahmed" src="https://cdn.devdojo.com/images/june2024/team-2.jpeg" class="object-cover rounded-full size-14">
+                    <div class="mr-4">
+                        <div class="font-medium text-zinc-900">فاطمة الأحمد</div>
+                        <div class="mt-1 text-sm text-zinc-500">مديرة تسويق، إبداع الشرق</div>
                     </div>
                 </figcaption>
             </figure>
         </li>
         <li>
             <figure class="flex flex-col justify-between h-full">
-                <blockquote class="">
+                <blockquote dir="rtl">
                     <p class="text-sm sm:text-base font-medium text-zinc-500">
-                        Wave is an amazing SaaS Starter kit. The team here are Laravel leverages Wave all the time for many projects.
+                        "قدموا لنا استشارات تقنية غيرت مسار شركتنا. رؤيتهم الثاقبة وخبرتهم العميقة ساعدتنا على اتخاذ قرارات استراتيجية ناجحة."
                     </p>
                 </blockquote>
-                <figcaption class="flex flex-col justify-between mt-6">
-                    <img alt="#_" src="https://cdn.devdojo.com/images/june2024/taylor.jpeg" class="object-cover rounded-full grayscale size-14">
-                    <div class="mt-4">
-                        <div class="font-medium text-zinc-900">Taylor Otwell</div>
-                        <div class="mt-1 text-sm text-zinc-500">
-                            Founder and Creator of Laravel
-                        </div>
+                <figcaption class="flex items-center mt-6" dir="rtl">
+                    <img alt="Yousef Al-Mansoori" src="https://cdn.devdojo.com/images/june2024/team-3.jpeg" class="object-cover rounded-full size-14">
+                    <div class="mr-4">
+                        <div class="font-medium text-zinc-900">يوسف المنصوري</div>
+                        <div class="mt-1 text-sm text-zinc-500">الرئيس التنفيذي، رؤية المستقبل</div>
                     </div>
                 </figcaption>
             </figure>

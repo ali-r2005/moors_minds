@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->text('message')->nullable();
             $table->foreignId('service_id')->nullable()->constrained();
+            $table->enum('status', ['pending', 'handled', 'archived'])->default('pending');
             $table->string('source')->nullable(); // e.g. “Home CTA”
             $table->timestamps();
         });

@@ -19,32 +19,39 @@ new class extends Component {
 <x-layouts.marketing>
     @volt('services')
         <x-app.container>
-            <x-app.heading
-                title="Our Services"
-                description="Discover what we offer"
-                :border="false"
-            />
+            <div class="py-12 sm:py-24">
+                <x-marketing.elements.heading
+                    level="h1"
+                    title="Our Services"
+                    description="Explore our comprehensive suite of services designed to elevate your business."
+                />
 
-            @if($services->isEmpty())
-                <div class="w-full p-20 text-center bg-gray-100 rounded-xl">
-                    <p class="text-gray-500">No services available at the moment.</p>
-                </div>
-            @else
-                <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6">
-                    @foreach($services as $service)
-                        <div class="bg-white shadow rounded-xl p-6 hover:shadow-lg transition">
-                            <h2 class="text-xl font-semibold text-indigo-600 mb-2">{{ $service->name }}</h2>
-                            <p class="text-gray-600 mb-4">{{ Str::limit($service->description, 100) }}</p>
-
-                            @if ($service->price)
-                                <p class="text-sm font-medium text-gray-800">
-                                    Price: <span class="text-green-600">${{ number_format($service->price, 2) }}</span>
-                                </p>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            @endif
+                @if($services->isEmpty())
+                    <div class="w-full p-20 mt-12 text-center bg-zinc-50 rounded-xl">
+                        <p class="text-zinc-500">No services available at the moment. Please check back later.</p>
+                    </div>
+                @else
+                    <div class="grid grid-cols-1 gap-10 mt-12 sm:grid-cols-2 lg:grid-cols-3">
+                        @foreach($services as $service)
+                            <a href="{{ route('services.show', ['service' => $service->slug]) }}" class="block overflow-hidden transition duration-300 bg-white border shadow-lg group rounded-2xl hover:shadow-2xl hover:-translate-y-2">
+                                <div>
+                                    @if($service->image_url)
+                                        <img class="object-cover w-full h-64 transition duration-300 group-hover:scale-105" src="{{ asset('storage/'.$service->image_url) }}" alt="{{ $service->title }}">
+                                    @else
+                                        <div class="flex items-center justify-center w-full h-64 bg-zinc-200">
+                                            <x-phosphor-image class="w-16 h-16 text-zinc-400" />
+                                        </div>
+                                    @endif
+                                    <div class="p-8">
+                                        <h2 class="text-2xl font-bold text-zinc-900 transition duration-300 group-hover:text-primary-500">{{ $service->title }}</h2>
+                                        <p class="mt-4 text-base text-zinc-500">{{ Str::limit($service->description, 120) }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
         </x-app.container>
     @endvolt
-</x-layouts.app>
+</x-layouts.marketing>
